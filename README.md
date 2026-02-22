@@ -93,6 +93,7 @@ with $a = 6/\pi^2 = 1/\zeta(2)$, $b = 3/\pi$:
   howpublished = {\url{[https://github.com/dogan1908/cone_analysis]}}
 }
 ```
+Publication: Differential‑Geometric Analysis of the Conical Helix — DOI: [10.5281/zenodo.18728571](https://doi.org/10.5281/zenodo.18728571)
 
 ## Contact
 

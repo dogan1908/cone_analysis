@@ -90,7 +90,7 @@ with $a = 6/\pi^2 = 1/\zeta(2)$, $b = 3/\pi$:
   title        = {Mathematical Analysis of the Cone Surface},
   year         = {2026},
   publisher    = {GitHub},
-  howpublished = {\url{https://github.com/USERNAME/cone-surface-analysis}}
+  howpublished = {\url{[https://github.com/dogan1908/cone_analysis]}}
 }
 ```
 

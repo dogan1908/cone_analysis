@@ -1,0 +1,505 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{float}
+
+\geometry{a4paper, margin=2.5cm}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=green!60!black,
+  urlcolor=blue!60!black,
+  pdftitle={Mathematical Analysis of the Cone Surface},
+  pdfauthor={Dogan Balban},
+  pdfkeywords={cone, surface of revolution, Gaussian curvature, surface area, volume}
+}
+
+% Theorem environments
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+% cleveref names
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\crefname{remark}{Remark}{Remarks}
+\crefname{equation}{Eq.}{Eqs.}
+\crefname{table}{Table}{Tables}
+\crefname{section}{Section}{Sections}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vek}[1]{\vec{#1}}
+
+\title{\textbf{Mathematical Analysis of the Cone Surface}\\[0.5em]
+\large Complete Differential-Geometric Treatment:\\
+Curvature, Surface Area, Volume, and Geometric Properties}
+\author{Dogan Balban}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper presents a complete mathematical analysis of the cone surface defined by
+\[
+z = -\frac{1}{12}\cdot 3^{2} + 6\cdot\sqrt{\frac{x^{2}}{\bigl(\tfrac{12}{\pi}\bigr)^{2}}
++\frac{y^{2}}{\bigl(\tfrac{12}{\pi}\bigr)^{2}}}.
+\]
+We investigate the algebraic structure, geometric properties, differential geometry,
+curvature behaviour, and surface parametrization. The analysis covers partial derivatives,
+gradient, normal vectors, surface area, volume, and a complete characterisation of this
+cone.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+%=============================================================
+\section{Introduction and Simplification}
+
+\subsection{Given Expression}
+
+We consider the surface defined by:
+\begin{equation}\label{eq:original}
+z = -\frac{1}{12}\cdot 3^{2} + 6\cdot\sqrt{\frac{x^{2}}{\bigl(\tfrac{12}{\pi}\bigr)^{2}}
++\frac{y^{2}}{\bigl(\tfrac{12}{\pi}\bigr)^{2}}}
+\end{equation}
+
+\subsection{Algebraic Simplification}
+
+\begin{proposition}[Simplification]\label{prop:simplification}
+Expression \eqref{eq:original} simplifies to:
+\begin{equation}\label{eq:simplified}
+z = -\frac{3}{4} + \frac{\pi}{2}\sqrt{x^2 + y^2}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\textbf{Step~1} (Constant term): $-\tfrac{1}{12}\cdot 3^{2} = -\tfrac{9}{12} = -\tfrac{3}{4}$.
+
+\textbf{Step~2} (Radicand): $\dfrac{x^{2}}{(12/\pi)^{2}} = x^{2}\cdot\dfrac{\pi^2}{144}$,
+and analogously for $y$.
+
+\textbf{Step~3}: $\sqrt{\dfrac{\pi^2}{144}(x^2+y^2)} = \dfrac{\pi}{12}\sqrt{x^2+y^2}$.
+
+\textbf{Step~4}: $6\cdot\dfrac{\pi}{12}\sqrt{x^2+y^2} = \dfrac{\pi}{2}\sqrt{x^2+y^2}$.
+
+\textbf{Step~5}: Combining: $z = -\tfrac{3}{4}+\tfrac{\pi}{2}\sqrt{x^2+y^2}$.
+\end{proof}
+
+\subsection{Cylindrical Coordinates}
+
+\begin{definition}[Cylindrical form]\label{def:cylindrical}
+Setting $x = r\cos\theta$, $y = r\sin\theta$, $r = \sqrt{x^2+y^2}$, the equation
+reduces to:
+\begin{equation}\label{eq:cylindrical}
+\boxed{z = -\frac{3}{4} + \frac{\pi}{2}\,r.}
+\end{equation}
+\end{definition}
+
+\begin{remark}
+Equation~\eqref{eq:cylindrical} is independent of $\theta$: the surface is a
+\textbf{surface of revolution} about the $z$-axis -- specifically, a \textbf{right
+circular cone}.
+\end{remark}
+
+%=============================================================
+\section{Geometric Characterisation}
+
+\subsection{Identification as a Cone}
+
+\begin{theorem}[Cone property]\label{thm:cone}
+The surface defined by~\eqref{eq:cylindrical} is a right circular cone with:
+\begin{itemize}
+\item apex at $(0,0,-\tfrac{3}{4})$,
+\item axis along the positive $z$-axis,
+\item slope $m = \tfrac{\pi}{2}$.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+The equation $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$ is linear in $r$ with positive
+coefficient. At $r=0$ we have $z=-\tfrac{3}{4}$ (apex). For $r>0$, $z$ increases
+linearly -- the characteristic property of a right circular cone.
+\end{proof}
+
+\subsection{Cone Angles}\label{sec:cone_angle}
+
+\begin{definition}[Cone half-angle]\label{def:cone_angle}
+The \emph{cone half-angle} $\alpha$ is the angle between the cone axis ($z$-axis)
+and a generator (slant line).
+\end{definition}
+
+\begin{proposition}[Cone half-angle]\label{prop:cone_angle}
+For our cone:
+\begin{equation}\label{eq:cone_angle}
+\alpha = \arctan\!\left(\frac{2}{\pi}\right) \approx 0.5669\text{ rad} \approx 32.48^\circ.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+A generator runs from $(r_0,\theta_0,z_0)$ to $(r_0+\Delta r,\theta_0,z_0+\Delta z)$
+with $\Delta z = \tfrac{\pi}{2}\,\Delta r$. The angle \emph{between the axis and the
+generator} satisfies:
+\[
+\tan\alpha = \frac{\Delta r}{\Delta z} = \frac{1}{\pi/2} = \frac{2}{\pi}
+\quad\Rightarrow\quad
+\alpha = \arctan\!\left(\frac{2}{\pi}\right) \approx 32.48^\circ.
+\]
+\end{proof}
+
+\begin{remark}[Elevation angle and complementary angle]\label{rem:angles}
+The complementary \emph{elevation angle} (angle between generator and the horizontal
+$xy$-plane) is:
+\[
+\beta = \arctan\!\left(\frac{\pi}{2}\right) \approx 1.0039\text{ rad} \approx 57.52^\circ,
+\]
+with $\alpha+\beta = \tfrac{\pi}{2}$ ($32.48^\circ+57.52^\circ = 90^\circ$).
+Some literature uses $\beta$ as the ``cone angle''; in this paper $\alpha$ always
+denotes the angle between axis and generator (\cref{def:cone_angle}).
+\end{remark}
+
+\begin{corollary}[Apex angle]\label{cor:apex_angle}
+The full apex angle (between two opposite generators) is:
+\[
+2\alpha = 2\arctan\!\left(\frac{2}{\pi}\right) \approx 64.96^\circ.
+\]
+\end{corollary}
+
+\subsection{Cross-Sections}
+
+\begin{proposition}[Base circle]\label{prop:base_circle}
+The cone intersects $z=0$ in a circle of radius
+$r_0 = \tfrac{3}{2\pi}\approx 0.4775$.
+\end{proposition}
+
+\begin{proposition}[Horizontal cross-section]\label{prop:horizontal}
+The intersection with $z=h$ (for $h\geq -\tfrac{3}{4}$) is a circle of radius:
+\begin{equation}\label{eq:radius_h}
+r(h) = \frac{2}{\pi}\!\left(h+\frac{3}{4}\right).
+\end{equation}
+\end{proposition}
+
+%=============================================================
+\section{Functional Representation}
+
+\subsection{Explicit Form and Partial Derivatives}
+
+As a graph: $f(x,y) = -\tfrac{3}{4}+\tfrac{\pi}{2}\sqrt{x^2+y^2}$, $(x,y)\in\R^2$.
+
+\begin{proposition}[Partial derivatives]\label{prop:partial}
+For $(x,y)\neq(0,0)$:
+\begin{align}
+f_x &= \frac{\pi x}{2r},\quad f_y = \frac{\pi y}{2r};\label{eq:grad1}\\
+f_{xx} &= \frac{\pi y^2}{2r^3},\quad f_{yy} = \frac{\pi x^2}{2r^3},\quad
+f_{xy} = -\frac{\pi xy}{2r^3}.\label{eq:grad2}
+\end{align}
+\end{proposition}
+
+\begin{remark}
+At the apex $(0,0)$ the partial derivatives are undefined: this is the geometric
+singularity of the cone.
+\end{remark}
+
+\subsection{Gradient and Normal Vector}
+
+\begin{proposition}[Gradient and normal]\label{prop:gradient}
+\begin{align*}
+\nabla f &= \left(\frac{\pi x}{2r},\;\frac{\pi y}{2r}\right),\quad
+|\nabla f| = \frac{\pi}{2}\quad(\text{constant for all }(x,y)\neq(0,0)),\\
+\vek{n} &= \left(\frac{\pi x}{2r},\;\frac{\pi y}{2r},\;-1\right),\quad
+\hat{n} = \frac{1}{\sqrt{1+\pi^2/4}}\vek{n}.
+\end{align*}
+\end{proposition}
+
+%=============================================================
+\section{Parametrization}
+
+\begin{definition}[Parametrization]\label{def:param}
+A natural parametrization of the cone surface is:
+\begin{equation}\label{eq:parametrization}
+\vek{\gamma}(r,\theta) = \bigl(r\cos\theta,\;r\sin\theta,\;{-\tfrac{3}{4}+\tfrac{\pi}{2}r}\bigr)^\top,
+\quad r\geq 0,\;\theta\in[0,2\pi).
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Tangent vectors and cross product]\label{prop:cross}
+\begin{align*}
+\frac{\partial\vek{\gamma}}{\partial r} &= (\cos\theta,\;\sin\theta,\;\tfrac{\pi}{2})^\top,\quad
+\frac{\partial\vek{\gamma}}{\partial\theta} = (-r\sin\theta,\;r\cos\theta,\;0)^\top,\\
+\frac{\partial\vek{\gamma}}{\partial r}\times\frac{\partial\vek{\gamma}}{\partial\theta}
+&= \bigl(-\tfrac{\pi r}{2}\cos\theta,\;-\tfrac{\pi r}{2}\sin\theta,\;r\bigr)^\top,\\
+\left|\frac{\partial\vek{\gamma}}{\partial r}\times\frac{\partial\vek{\gamma}}{\partial\theta}\right|
+&= r\sqrt{1+\frac{\pi^2}{4}}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Direct computation. Magnitude:
+$\sqrt{(\pi r/2)^2(\cos^2\theta+\sin^2\theta)+r^2} = r\sqrt{1+\pi^2/4}$.
+\end{proof}
+
+%=============================================================
+\section{Surface Area}
+
+\begin{theorem}[Lateral surface area of frustum]\label{thm:surface_area}
+The lateral surface area of the cone frustum between radii $r_1$ and $r_2$
+($0\leq r_1<r_2$) is:
+\begin{equation}\label{eq:surface_area}
+A = \pi\sqrt{1+\frac{\pi^2}{4}}\cdot(r_2^2 - r_1^2).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+$A = \int_0^{2\pi}\!\int_{r_1}^{r_2}\sqrt{1+\pi^2/4}\cdot r\,dr\,d\theta
+= \sqrt{1+\pi^2/4}\cdot 2\pi\cdot\tfrac{r_2^2-r_1^2}{2}
+= \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$.
+\end{proof}
+
+\begin{corollary}[Surface area from apex]\label{cor:surface_from_apex}
+The lateral surface area from the apex to radius $r$:
+\begin{equation}\label{eq:surface_apex}
+A(r) = \pi r^2\sqrt{1+\frac{\pi^2}{4}} \approx 1.8621\cdot\pi r^2.
+\end{equation}
+\end{corollary}
+
+%=============================================================
+\section{Volume}
+
+\begin{theorem}[Volume of frustum]\label{thm:volume}
+The volume of the frustum between heights $h_1$ and $h_2$
+($-\tfrac{3}{4}\leq h_1<h_2$) is:
+\begin{equation}\label{eq:volume}
+V = \frac{4}{3\pi}\left[\left(h_2+\frac{3}{4}\right)^3 - \left(h_1+\frac{3}{4}\right)^3\right].
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Using $r(h) = \tfrac{2}{\pi}(h+\tfrac{3}{4})$ from \cref{prop:horizontal}:
+\[
+V = \int_{h_1}^{h_2}\pi\,[r(h)]^2\,dh
+= \frac{4}{\pi}\int_{h_1}^{h_2}\!\left(h+\frac{3}{4}\right)^2 dh
+= \frac{4}{3\pi}\!\left[\left(h+\frac{3}{4}\right)^3\right]_{h_1}^{h_2}.
+\]
+\textit{Verification}: For $h_1=-\tfrac{3}{4}$, $h_2=h$, the classical cone formula
+$V=\tfrac{1}{3}\pi R^2 H$ with $R=r(h)$, $H=h+\tfrac{3}{4}$ gives the same result.
+\end{proof}
+
+%=============================================================
+\section{Curvature Analysis}
+
+\subsection{Gaussian Curvature}
+
+\begin{theorem}[Gaussian curvature]\label{thm:gauss}
+At every regular point of the cone:
+\[
+K = 0.
+\]
+\end{theorem}
+
+\begin{proof}
+A cone is a \emph{developable surface} (locally isometric to the plane): $K=0$.
+Directly: $\kappa_1 = 0$ along generators (straight lines), so $K = \kappa_1\kappa_2 = 0$.
+\end{proof}
+
+\subsection{Mean Curvature}
+
+\begin{proposition}[Mean curvature]\label{prop:mean_curvature}
+At a point with radial coordinate $r>0$:
+\begin{equation}\label{eq:mean_curvature}
+H = \frac{\pi}{4r\sqrt{1+\dfrac{\pi^2}{4}}} = \frac{\pi}{2r\sqrt{4+\pi^2}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+For $z = f(x,y)$, the mean curvature is:
+\[
+H = \frac{(1+f_y^2)f_{xx} - 2f_xf_yf_{xy} + (1+f_x^2)f_{yy}}{2(1+f_x^2+f_y^2)^{3/2}}.
+\]
+Since $f_x^2+f_y^2 = \pi^2/4$ (constant, \cref{prop:gradient}), the denominator
+is $2(1+\pi^2/4)^{3/2}$. Expanding the numerator using \cref{prop:partial}:
+\[
+\text{Numerator} = \frac{\pi y^2}{2r^3}+\frac{\pi x^2}{2r^3}
++\frac{\pi^3(x^4+y^4+2x^2y^2)}{8r^5}
+= \frac{\pi}{2r}+\frac{\pi^3}{8r} = \frac{\pi(4+\pi^2)}{8r}.
+\]
+Hence:
+\[
+H = \frac{\pi(4+\pi^2)/8r}{2[(4+\pi^2)/4]^{3/2}}
+= \frac{\pi}{2r\sqrt{4+\pi^2}} = \frac{\pi}{4r\sqrt{1+\pi^2/4}}. \qed
+\]
+\end{proof}
+
+\begin{remark}
+Equivalently, using the parametric formula $H = m/(2r\sqrt{1+m^2})$ with slope $m=\pi/2$
+yields $H = (\pi/2)/(2r\sqrt{1+\pi^2/4}) = \pi/(4r\sqrt{1+\pi^2/4})$ directly.
+Since $\kappa_1=0$, the second principal curvature is $\kappa_2 = 2H$.
+\end{remark}
+
+%=============================================================
+\section{Geodesics}
+
+\begin{theorem}[Geodesics on the cone]
+The geodesic lines on the cone are:
+\begin{enumerate}
+\item \textbf{Generators}: straight lines radially from the apex.
+\item \textbf{Rolled geodesics}: curves that become straight lines when the cone
+is developed (unrolled) into a planar sector.
+\end{enumerate}
+The developed cone is a circular sector with opening angle
+$2\pi\sin\alpha \approx 2\pi\times 0.5365 \approx 3.370\text{ rad} \approx 193.1^\circ$.
+\end{theorem}
+
+%=============================================================
+\section{Numerical Examples}
+
+\begin{table}[H]
+\centering
+\caption{Cone parameters}\label{tab:parameters}
+\begin{tabular}{lcc}
+\toprule
+Parameter & Exact value & Numerical \\
+\midrule
+Apex ($z$-coordinate) & $-\tfrac{3}{4}$ & $-0.750$ \\
+Slope $m$ & $\tfrac{\pi}{2}$ & $1.5708$ \\
+Half-angle $\alpha$ (axis--generator) & $\arctan(2/\pi)$ & $0.5669\text{ rad} = 32.48^\circ$ \\
+Elevation angle $\beta$ (generator--horiz.) & $\arctan(\pi/2)$ & $1.0039\text{ rad} = 57.52^\circ$ \\
+Apex angle $2\alpha$ & $2\arctan(2/\pi)$ & $64.96^\circ$ \\
+Base radius ($z=0$) & $\tfrac{3}{2\pi}$ & $0.4775$ \\
+$\sqrt{1+\pi^2/4}$ & $\tfrac{\sqrt{4+\pi^2}}{2}$ & $1.8621$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Lateral surface area: $A = \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$}
+\label{tab:surface_area}
+\begin{tabular}{ccc}
+\toprule
+$r_1$ & $r_2$ & $A$ \\
+\midrule
+$0$ & $5$  & $146.249$ \\
+$0$ & $10$ & $584.995$ \\
+$5$ & $10$ & $438.746$ \\
+$0$ & $20$ & $2339.979$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Volume: $V = \tfrac{4}{3\pi}\bigl[(h_2+\tfrac{3}{4})^3-(h_1+\tfrac{3}{4})^3\bigr]$}
+\label{tab:volume}
+\begin{tabular}{ccc}
+\toprule
+$h_1$ & $h_2$ & $V$ \\
+\midrule
+$-0.75$ & $0$  & $0.179$ \\
+$0$     & $10$ & $527.068$ \\
+$-0.75$ & $10$ & $527.247$ \\
+$0$     & $20$ & $3791.601$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%=============================================================
+\section{Summary of All Properties}
+
+\begin{table}[H]
+\centering
+\caption{Complete summary of cone properties}\label{tab:summary}
+\begin{tabular}{ll}
+\toprule
+Property & Value / Formula \\
+\midrule
+Simplified form & $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$ \\
+Surface type & Right circular cone \\
+Apex & $(0,0,-\tfrac{3}{4})$ \\
+Slope & $m = \tfrac{\pi}{2}$ \\
+Half-angle $\alpha$ (axis--generator) & $\arctan(2/\pi)\approx 32.48^\circ$ \\
+Elevation angle $\beta$ & $\arctan(\pi/2)\approx 57.52^\circ$ \\
+Apex angle $2\alpha$ & $2\arctan(2/\pi)\approx 64.96^\circ$ \\
+Gaussian curvature & $K=0$ (developable) \\
+Mean curvature & $H = \dfrac{\pi}{4r\sqrt{1+\pi^2/4}}$ \\[4pt]
+Gradient magnitude & $|\nabla f| = \tfrac{\pi}{2}$ \\
+Lateral surface area & $A = \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$ \\
+Volume & $V = \tfrac{4}{3\pi}\bigl[(h_2+\tfrac{3}{4})^3-(h_1+\tfrac{3}{4})^3\bigr]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%=============================================================
+\section{Conclusion}
+
+This paper has presented a complete mathematical analysis of the cone surface
+$z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$:
+
+\begin{enumerate}
+\item The complex original expression simplifies elegantly to $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$.
+\item The surface is a right circular cone with apex $(0,0,-\tfrac{3}{4})$ and slope $\pi/2$.
+\item Gaussian curvature $K=0$ (developable surface, locally isometric to the plane).
+\item Cone half-angle (axis--generator): $\alpha = \arctan(2/\pi)\approx 32.48^\circ$;
+elevation angle: $\beta = \arctan(\pi/2)\approx 57.52^\circ$; apex angle: $2\alpha\approx 64.96^\circ$.
+\item Gradient is constant: $|\nabla f| = \pi/2$.
+\item Mean curvature: $H = \pi/(4r\sqrt{1+\pi^2/4})$, decreasing as $r\to\infty$.
+\item Closed-form expressions exist for lateral surface area and volume.
+\end{enumerate}
+
+%=============================================================
+
+\begin{thebibliography}{9}
+
+\bibitem{docarmo}
+M.~P.~do~Carmo,
+\textit{Differential Geometry of Curves and Surfaces}, revised ed.
+Dover Publications, Mineola, NY, 2016.
+
+\bibitem{struik}
+D.~J.~Struik,
+\textit{Lectures on Classical Differential Geometry}, 2nd~ed.
+Dover Publications, New York, 1988.
+
+\bibitem{gray}
+A.~Gray, E.~Abbena, and S.~Salamon,
+\textit{Modern Differential Geometry of Curves and Surfaces with Mathematica}, 3rd~ed.
+Chapman \& Hall/CRC, Boca Raton, FL, 2006.
+
+\bibitem{pressley}
+A.~Pressley,
+\textit{Elementary Differential Geometry}, 2nd~ed.
+Springer, London, 2010.
+
+\bibitem{balban_helix}
+D.~Balban,
+\textit{Differential-Geometric Analysis of the Conical Helix},
+Independent mathematical publication, 2026.
+
+\end{thebibliography}
+
+\end{document}

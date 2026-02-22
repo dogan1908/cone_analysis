@@ -1,0 +1,503 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pakete
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{float}
+
+\geometry{a4paper, margin=2.5cm}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  citecolor=green!60!black,
+  urlcolor=blue!60!black,
+  pdftitle={Mathematische Analyse der Kegelflaeche},
+  pdfauthor={Dogan Balban},
+  pdfkeywords={Kegel, Rotationsflaeche, Gauss-Kruemmung, Flaecheninhalt, Volumen}
+}
+
+% Theorem-Umgebungen
+\theoremstyle{plain}
+\newtheorem{satz}{Satz}[section]
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{proposition}[satz]{Proposition}
+\newtheorem{korollar}[satz]{Korollar}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{beispiel}{Beispiel}[section]
+
+\theoremstyle{remark}
+\newtheorem{bemerkung}{Bemerkung}[section]
+
+% cleveref
+\crefname{satz}{Satz}{Saetze}
+\crefname{proposition}{Proposition}{Propositionen}
+\crefname{korollar}{Korollar}{Korollare}
+\crefname{definition}{Definition}{Definitionen}
+\crefname{bemerkung}{Bemerkung}{Bemerkungen}
+\crefname{equation}{Gl.}{Gl.}
+\crefname{table}{Tab.}{Tab.}
+\crefname{section}{Abschnitt}{Abschnitte}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vek}[1]{\vec{#1}}
+
+\title{\textbf{Mathematische Analyse der Kegelfl\"{a}che}\\[0.5em]
+\large Vollst\"{a}ndige Kurvendiskussion, Differentialgeometrie\\
+und geometrische Eigenschaften}
+\author{Dogan Balban}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Diese Arbeit pr\"{a}sentiert eine vollst\"{a}ndige mathematische Analyse der Kegelfl\"{a}che,
+die durch die Gleichung
+\[
+z = -\frac{1}{12}\cdot 3^{2} + 6\cdot\sqrt{\frac{x^{2}}{\left(\frac{12}{\pi}\right)^{2}}
++\frac{y^{2}}{\left(\frac{12}{\pi}\right)^{2}}}
+\]
+gegeben ist. Wir untersuchen algebraische Struktur, geometrische Eigenschaften,
+Differentialgeometrie, Kr\"{u}mmungsverhalten und Fl\"{a}chenparametrisierung.
+Die Analyse umfasst partielle Ableitungen, Gradient, Normalenvektoren,
+Fl\"{a}cheninhalt, Volumen und eine vollst\"{a}ndige Charakterisierung.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Einleitung und Vereinfachung}
+
+\subsection{Gegebener Term}
+
+Wir betrachten die Fl\"{a}che:
+\begin{equation}\label{eq:original}
+z = -\frac{1}{12}\cdot 3^{2} + 6\cdot\sqrt{\frac{x^{2}}{\left(\frac{12}{\pi}\right)^{2}}
++\frac{y^{2}}{\left(\frac{12}{\pi}\right)^{2}}}
+\end{equation}
+
+\subsection{Algebraische Vereinfachung}
+
+\begin{proposition}[Vereinfachung]\label{prop:vereinfachung}
+Der gegebene Term \eqref{eq:original} vereinfacht sich zu:
+\begin{equation}\label{eq:simplified}
+z = -\frac{3}{4} + \frac{\pi}{2}\sqrt{x^2 + y^2}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+\textbf{Schritt~1} (Konstanter Term):
+$-\tfrac{1}{12}\cdot 3^{2} = -\tfrac{9}{12} = -\tfrac{3}{4}$.
+
+\textbf{Schritt~2} (Wurzelterm):
+$\dfrac{x^{2}}{(12/\pi)^{2}} = x^{2}\cdot\dfrac{\pi^2}{144}$, analog f\"{u}r $y$.
+
+\textbf{Schritt~3}:
+$\sqrt{\dfrac{\pi^2}{144}(x^2+y^2)} = \dfrac{\pi}{12}\sqrt{x^2+y^2}$.
+
+\textbf{Schritt~4}:
+$6\cdot\dfrac{\pi}{12}\sqrt{x^2+y^2} = \dfrac{\pi}{2}\sqrt{x^2+y^2}$.
+
+\textbf{Schritt~5}: Gesamtterm: $z = -\tfrac{3}{4}+\tfrac{\pi}{2}\sqrt{x^2+y^2}$.\qed
+\end{proof}
+
+\subsection{Darstellung in Zylinderkoordinaten}
+
+\begin{definition}[Zylinderkoordinaten]\label{def:zylinder}
+Mit $x = r\cos\theta$, $y = r\sin\theta$, $r = \sqrt{x^2+y^2}$ nimmt
+die Gleichung die Form an:
+\begin{equation}\label{eq:cylindrical}
+\boxed{z = -\frac{3}{4} + \frac{\pi}{2}\,r}
+\end{equation}
+\end{definition}
+
+\begin{bemerkung}
+Gleichung~\eqref{eq:cylindrical} ist unabh\"{a}ngig von $\theta$ -- die Fl\"{a}che ist
+eine \textbf{Rotationsfl\"{a}che} um die $z$-Achse, genauer: ein \textbf{gerader Kreiskegel}.
+\end{bemerkung}
+
+\section{Geometrische Charakterisierung}
+
+\subsection{Identifikation als Kegel}
+
+\begin{satz}[Kegeleigenschaft]\label{satz:kegel}
+Die durch~\eqref{eq:cylindrical} definierte Fl\"{a}che ist ein gerader Kreiskegel mit:
+\begin{itemize}
+\item Spitze bei $(0,0,-\tfrac{3}{4})$,
+\item Achse entlang der positiven $z$-Achse,
+\item Steigung $m = \tfrac{\pi}{2}$.
+\end{itemize}
+\end{satz}
+
+\begin{proof}
+Die Gleichung $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$ ist linear in $r$ mit positivem Koeffizienten.
+F\"{u}r $r=0$ gilt $z=-\tfrac{3}{4}$ (Kegelspitze). F\"{u}r $r>0$ w\"{a}chst $z$ linear
+-- charakteristisch f\"{u}r einen geraden Kreiskegel.
+\end{proof}
+
+\subsection{Kegelwinkel}\label{sec:kegelwinkel}
+
+\begin{definition}[Kegelwinkel]\label{def:kegelwinkel}
+Der \emph{Kegelwinkel} $\alpha$ ist der Winkel zwischen der Kegelachse ($z$-Achse)
+und einer Mantellinie.
+\end{definition}
+
+\begin{proposition}[Kegelwinkel]\label{prop:kegelwinkel}
+F\"{u}r unseren Kegel gilt:
+\begin{equation}\label{eq:kegelwinkel}
+\alpha = \arctan\!\left(\frac{2}{\pi}\right) \approx 0{,}5669\text{ rad} \approx 32{,}48^\circ.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Eine Mantellinie verl\"{a}uft von $(r_0,\theta_0,z_0)$ nach $(r_0+\Delta r,\theta_0,z_0+\Delta z)$
+mit $\Delta z = \tfrac{\pi}{2}\,\Delta r$. Der Winkel \emph{zwischen Achse und Mantellinie}:
+\[
+\tan\alpha = \frac{\Delta r}{\Delta z} = \frac{1}{\pi/2} = \frac{2}{\pi}
+\quad\Rightarrow\quad
+\alpha = \arctan\!\left(\frac{2}{\pi}\right) \approx 32{,}48^\circ.
+\]
+\end{proof}
+
+\begin{bemerkung}[Elevationswinkel und Komplement\"{a}rwinkel]\label{bem:winkel}
+Der komplement\"{a}re \emph{Elevationswinkel} (Winkel zwischen Mantellinie und der
+horizontalen $xy$-Ebene) ist:
+\[
+\beta = \arctan\!\left(\frac{\pi}{2}\right) \approx 1{,}0039\text{ rad} \approx 57{,}52^\circ,
+\]
+mit $\alpha+\beta = \tfrac{\pi}{2}$ ($32{,}48^\circ+57{,}52^\circ = 90^\circ$).
+In einem Teil der Literatur wird $\beta$ als ,,Kegelwinkel'' bezeichnet.
+In dieser Arbeit bezeichnet $\alpha$ stets den Winkel zwischen Kegelachse und
+Mantellinie (gem\"{a}\ss\ \cref{def:kegelwinkel}).
+\end{bemerkung}
+
+\begin{korollar}[\"{O}ffnungswinkel]\label{kor:oeffnung}
+Der \"{O}ffnungswinkel (Gesamtwinkel an der Kegelspitze zwischen zwei gegen\"{u}berliegenden
+Mantellinien) betr\"{a}gt:
+\[
+2\alpha = 2\arctan\!\left(\frac{2}{\pi}\right) \approx 64{,}96^\circ.
+\]
+\end{korollar}
+
+\subsection{Schnittkurven}
+
+\begin{proposition}[Basiskreis]\label{prop:basiskreis}
+Der Kegel schneidet $z=0$ im Kreis mit Radius
+$r_0 = \tfrac{3}{2\pi} \approx 0{,}4775$.
+\end{proposition}
+
+\begin{proposition}[H\"{o}henschnitt]\label{prop:hoehenschnitt}
+Der Schnitt mit $z=h$ ($h\geq -\tfrac{3}{4}$) ist ein Kreis mit Radius:
+\begin{equation}\label{eq:radials}
+r(h) = \frac{2}{\pi}\!\left(h+\frac{3}{4}\right).
+\end{equation}
+\end{proposition}
+
+\section{Funktionale Darstellung}
+
+\subsection{Explizite Form und erste Ableitungen}
+
+Die Fl\"{a}che als Graph: $f(x,y) = -\tfrac{3}{4}+\tfrac{\pi}{2}\sqrt{x^2+y^2}$,
+$(x,y)\in\R^2$.
+
+\begin{proposition}[Partielle Ableitungen]\label{prop:partial}
+F\"{u}r $(x,y)\neq(0,0)$:
+\begin{align}
+f_x &= \frac{\pi x}{2r},\quad
+f_y = \frac{\pi y}{2r};\label{eq:grad1}\\
+f_{xx} &= \frac{\pi y^2}{2r^3},\quad
+f_{yy} = \frac{\pi x^2}{2r^3},\quad
+f_{xy} = -\frac{\pi xy}{2r^3}.\label{eq:grad2}
+\end{align}
+\end{proposition}
+
+\begin{bemerkung}
+An der Kegelspitze $(0,0)$ sind die partiellen Ableitungen nicht definiert
+(geometrische Singularit\"{a}t).
+\end{bemerkung}
+
+\subsection{Gradient und Normalenvektor}
+
+\begin{proposition}[Gradient und Normalenvektor]\label{prop:gradient}
+\begin{align*}
+\nabla f &= \left(\frac{\pi x}{2r},\;\frac{\pi y}{2r}\right),\quad
+|\nabla f| = \frac{\pi}{2}\quad(\text{konstant}),\\
+\vek{n} &= \left(\frac{\pi x}{2r},\;\frac{\pi y}{2r},\;-1\right),\quad
+\hat{n} = \frac{1}{\sqrt{1+\pi^2/4}}\vek{n}.
+\end{align*}
+\end{proposition}
+
+\section{Parametrisierung}
+
+\begin{definition}[Parametrisierung]\label{def:param}
+\begin{equation}\label{eq:parametrization}
+\vek{\gamma}(r,\theta) = \bigl(r\cos\theta,\;r\sin\theta,\;{-\tfrac{3}{4}+\tfrac{\pi}{2}r}\bigr)^\top,
+\quad r\geq 0,\;\theta\in[0,2\pi).
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Tangentialvektoren und Kreuzprodukt]\label{prop:kreuz}
+\begin{align*}
+\frac{\partial\vek{\gamma}}{\partial r} &= (\cos\theta,\;\sin\theta,\;\tfrac{\pi}{2})^\top,\quad
+\frac{\partial\vek{\gamma}}{\partial\theta} = (-r\sin\theta,\;r\cos\theta,\;0)^\top,\\
+\frac{\partial\vek{\gamma}}{\partial r}\times\frac{\partial\vek{\gamma}}{\partial\theta}
+&= \bigl(-\tfrac{\pi r}{2}\cos\theta,\;-\tfrac{\pi r}{2}\sin\theta,\;r\bigr)^\top,\\
+\left|\frac{\partial\vek{\gamma}}{\partial r}\times\frac{\partial\vek{\gamma}}{\partial\theta}\right|
+&= r\sqrt{1+\frac{\pi^2}{4}}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+Direktes Ausrechnen des Kreuzprodukts; der Betrag:
+$\sqrt{(\pi r/2)^2(\cos^2\theta+\sin^2\theta)+r^2} = r\sqrt{1+\pi^2/4}$.
+\end{proof}
+
+\section{Fl\"{a}cheninhalt}
+
+\begin{satz}[Mantelfl\"{a}che des Kegelstumpfs]\label{satz:mantelflaeche}
+Die Mantelfl\"{a}che des Kegelstumpfs zwischen $r_1$ und $r_2$ ($0\leq r_1<r_2$):
+\begin{equation}\label{eq:mantelflaeche}
+A = \pi\sqrt{1+\frac{\pi^2}{4}}\cdot(r_2^2 - r_1^2).
+\end{equation}
+\end{satz}
+
+\begin{proof}
+$A = \int_0^{2\pi}\!\int_{r_1}^{r_2}\sqrt{1+\pi^2/4}\cdot r\,dr\,d\theta
+= \sqrt{1+\pi^2/4}\cdot 2\pi\cdot\tfrac{r_2^2-r_1^2}{2}
+= \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$.
+\end{proof}
+
+\begin{korollar}[Mantelfl\"{a}che von der Spitze]\label{kor:mantelflaeche}
+\begin{equation}\label{eq:mantelspitze}
+A(r) = \pi r^2\sqrt{1+\frac{\pi^2}{4}} \approx 1{,}8621\cdot\pi r^2.
+\end{equation}
+\end{korollar}
+
+\section{Volumen}
+
+\begin{satz}[Volumen des Kegelstumpfs]\label{satz:volumen}
+\begin{equation}\label{eq:volumen}
+V = \frac{4}{3\pi}\left[\left(h_2+\frac{3}{4}\right)^3 - \left(h_1+\frac{3}{4}\right)^3\right],
+\quad -\tfrac{3}{4}\leq h_1 < h_2.
+\end{equation}
+\end{satz}
+
+\begin{proof}
+Mit $r(h) = \tfrac{2}{\pi}(h+\tfrac{3}{4})$:
+\[
+V = \int_{h_1}^{h_2}\pi\,[r(h)]^2\,dh
+= \frac{4}{\pi}\int_{h_1}^{h_2}\!\!\left(h+\frac{3}{4}\right)^2 dh
+= \frac{4}{3\pi}\!\left[\left(h+\frac{3}{4}\right)^3\right]_{h_1}^{h_2}.
+\]
+\textit{Kontrolle}: F\"{u}r $h_1=-\tfrac{3}{4}$, $h_2=h$ liefert die Kegelformel
+$V = \tfrac{1}{3}\pi R^2 H$ mit $R = r(h)$, $H = h+\tfrac{3}{4}$ dasselbe Ergebnis.
+\end{proof}
+
+\section{Kr\"{u}mmungsanalyse}
+
+\subsection{Gau\ss-Kr\"{u}mmung}
+
+\begin{satz}[Gau\ss-Kr\"{u}mmung]\label{satz:gauss}
+$K = 0$ f\"{u}r alle regul\"{a}ren Punkte des Kegels.
+\end{satz}
+
+\begin{proof}
+Kegel sind abwickelbare Fl\"{a}chen (lokal isometrisch zur Ebene): $K=0$.
+Direkt: $\kappa_1 = 0$ entlang der Mantellinien (Geraden), also $K=\kappa_1\kappa_2=0$.
+\end{proof}
+
+\subsection{Mittlere Kr\"{u}mmung}
+
+\begin{proposition}[Mittlere Kr\"{u}mmung]\label{prop:mittlere}
+An einem Punkt mit Radialkoordinate $r>0$:
+\begin{equation}\label{eq:mittlere}
+H = \frac{\pi}{4r\sqrt{1+\dfrac{\pi^2}{4}}} = \frac{\pi}{2r\sqrt{4+\pi^2}}.
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+F\"{u}r $z = f(x,y)$ gilt:
+\[
+H = \frac{(1+f_y^2)f_{xx} - 2f_xf_yf_{xy} + (1+f_x^2)f_{yy}}{2(1+f_x^2+f_y^2)^{3/2}}.
+\]
+Mit $f_x^2+f_y^2 = \pi^2/4$ (konstant) ergibt der Nenner $2(1+\pi^2/4)^{3/2}$.
+Der Z\"{a}hler (nach Einsetzen und Vereinfachen mit \cref{prop:partial}):
+\[
+\frac{\pi y^2}{2r^3}+\frac{\pi x^2}{2r^3}
++\frac{\pi^3(x^4+y^4+2x^2y^2)}{8r^5}
+= \frac{\pi}{2r}+\frac{\pi^3}{8r}
+= \frac{\pi(4+\pi^2)}{8r}.
+\]
+Daher:
+\[
+H = \frac{\pi(4+\pi^2)/8r}{2[(4+\pi^2)/4]^{3/2}}
+= \frac{\pi}{2r\sqrt{4+\pi^2}} = \frac{\pi}{4r\sqrt{1+\pi^2/4}}.\qed
+\]
+\end{proof}
+
+\begin{bemerkung}
+\"{A}quivalent mit parametrischer Formel: $H = m/(2r\sqrt{1+m^2})$ mit $m=\pi/2$
+liefert $H = (\pi/2)/(2r\sqrt{1+\pi^2/4}) = \pi/(4r\sqrt{1+\pi^2/4})$.
+Da $\kappa_1=0$, folgt die zweite Hauptkr\"{u}mmung
+$\kappa_2 = 2H = \pi/(2r\sqrt{1+\pi^2/4})$.
+\end{bemerkung}
+
+\section{Geod\"{a}tische Linien}
+
+\begin{satz}[Geod\"{a}ten auf dem Kegel]
+Die geod\"{a}tischen Linien auf dem Kegel sind:
+\begin{enumerate}
+\item \textbf{Mantellinien}: Geraden radial von der Spitze nach au\ss en.
+\item \textbf{Gewickelte Geod\"{a}ten}: Kurven, die beim Abwickeln des Kegels zu
+Geraden in der Ebene werden.
+\end{enumerate}
+Der abgewickelte Kegel bildet einen Kreissektor mit \"{O}ffnungswinkel
+$2\pi\sin\alpha \approx 2\pi\times 0{,}5365 \approx 3{,}370\text{ rad} \approx 193{,}1^\circ$.
+\end{satz}
+
+\section{Numerische Beispiele}
+
+\begin{table}[H]
+\centering
+\caption{Kegelparameter}\label{tab:kegelparameter}
+\begin{tabular}{lcc}
+\toprule
+Parameter & Exakter Wert & Numerisch \\
+\midrule
+Spitze ($z$-Koord.) & $-\tfrac{3}{4}$ & $-0{,}750$ \\
+Steigung $m$ & $\tfrac{\pi}{2}$ & $1{,}5708$ \\
+Kegelwinkel $\alpha$ & $\arctan(2/\pi)$ & $0{,}5669$ rad $= 32{,}48^\circ$ \\
+Elevationswinkel $\beta$ & $\arctan(\pi/2)$ & $1{,}0039$ rad $= 57{,}52^\circ$ \\
+\"{O}ffnungswinkel $2\alpha$ & $2\arctan(2/\pi)$ & $64{,}96^\circ$ \\
+Basisradius ($z=0$) & $\tfrac{3}{2\pi}$ & $0{,}4775$ \\
+$\sqrt{1+\pi^2/4}$ & $\tfrac{\sqrt{4+\pi^2}}{2}$ & $1{,}8621$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Mantelfl\"{a}che: $A = \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$}
+\label{tab:mantelflaeche}
+\begin{tabular}{ccc}
+\toprule
+$r_1$ & $r_2$ & $A$ \\
+\midrule
+$0$ & $5$  & $146{,}249$ \\
+$0$ & $10$ & $584{,}995$ \\
+$5$ & $10$ & $438{,}746$ \\
+$0$ & $20$ & $2339{,}979$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Volumen: $V = \tfrac{4}{3\pi}\bigl[(h_2+\tfrac{3}{4})^3-(h_1+\tfrac{3}{4})^3\bigr]$}
+\label{tab:volumen}
+\begin{tabular}{ccc}
+\toprule
+$h_1$ & $h_2$ & $V$ \\
+\midrule
+$-0{,}75$ & $0$  & $0{,}179$ \\
+$0$       & $10$ & $527{,}068$ \\
+$-0{,}75$ & $10$ & $527{,}247$ \\
+$0$       & $20$ & $3791{,}601$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Zusammenfassung}
+
+\begin{table}[H]
+\centering
+\caption{\"{U}bersicht aller Eigenschaften}
+\label{tab:zusammenfassung}
+\begin{tabular}{ll}
+\toprule
+Eigenschaft & Wert / Formel \\
+\midrule
+Vereinfachte Form & $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$ \\
+Fl\"{a}chentyp & Gerader Kreiskegel \\
+Kegelspitze & $(0,0,-\tfrac{3}{4})$ \\
+Steigung & $m = \tfrac{\pi}{2}$ \\
+Kegelwinkel $\alpha$ & $\arctan(2/\pi)\approx 32{,}48^\circ$ \\
+Elevationswinkel $\beta$ & $\arctan(\pi/2)\approx 57{,}52^\circ$ \\
+\"{O}ffnungswinkel $2\alpha$ & $2\arctan(2/\pi)\approx 64{,}96^\circ$ \\
+Gau\ss-Kr\"{u}mmung & $K=0$ (abwickelbar) \\
+Mittlere Kr\"{u}mmung & $H = \dfrac{\pi}{4r\sqrt{1+\pi^2/4}}$ \\[4pt]
+Gradient & $|\nabla f| = \tfrac{\pi}{2}$ \\
+Mantelfl\"{a}che & $A = \pi\sqrt{1+\pi^2/4}\cdot(r_2^2-r_1^2)$ \\
+Volumen & $V = \tfrac{4}{3\pi}\bigl[(h_2+\tfrac{3}{4})^3-(h_1+\tfrac{3}{4})^3\bigr]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Fazit}
+
+Diese Arbeit hat eine vollst\"{a}ndige mathematische Analyse der Kegelfl\"{a}che
+$z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$ pr\"{a}sentiert:
+
+\begin{enumerate}
+\item Der komplexe Ausgangsterm vereinfacht sich zu $z = -\tfrac{3}{4}+\tfrac{\pi}{2}r$.
+\item Die Fl\"{a}che ist ein gerader Kreiskegel mit Spitze $(0,0,-\tfrac{3}{4})$, Steigung $\pi/2$.
+\item Gau\ss-Kr\"{u}mmung $K=0$ (abwickelbare Fl\"{a}che).
+\item Kegelwinkel (Achse--Mantellinie): $\alpha = \arctan(2/\pi)\approx 32{,}48^\circ$;
+Elevationswinkel: $\beta = \arctan(\pi/2)\approx 57{,}52^\circ$; \"{O}ffnungswinkel: $2\alpha\approx 64{,}96^\circ$.
+\item Gradient konstant: $|\nabla f| = \pi/2$.
+\item Mittlere Kr\"{u}mmung: $H = \pi/(4r\sqrt{1+\pi^2/4})$.
+\item Geschlossene Formeln f\"{u}r Mantelfl\"{a}che und Volumen.
+\end{enumerate}
+
+\appendix
+
+
+\begin{thebibliography}{9}
+
+\bibitem{docarmo}
+M.~P.~do~Carmo,
+\textit{Differential Geometry of Curves and Surfaces}, revised ed.
+Dover Publications, Mineola, NY, 2016.
+
+\bibitem{struik}
+D.~J.~Struik,
+\textit{Lectures on Classical Differential Geometry}, 2nd~ed.
+Dover Publications, New York, 1988.
+
+\bibitem{gray}
+A.~Gray, E.~Abbena und S.~Salamon,
+\textit{Modern Differential Geometry of Curves and Surfaces with Mathematica}, 3rd~ed.
+Chapman \& Hall/CRC, Boca Raton, FL, 2006.
+
+\bibitem{bronstein}
+I.~N.~Bronstein und K.~A.~Semendjaev,
+\textit{Taschenbuch der Mathematik}, 10.~Aufl.
+Verlag Harri Deutsch, Frankfurt am Main, 2020.
+
+\bibitem{pressley}
+A.~Pressley,
+\textit{Elementary Differential Geometry}, 2nd~ed.
+Springer, London, 2010.
+
+\bibitem{balban_helix}
+D.~Balban,
+\textit{Differentialgeometrische Analyse der Kegelhelix},
+Eigenst\"{a}ndige mathematische Publikation, 2026.
+
+\end{thebibliography}
+
+\end{document}
